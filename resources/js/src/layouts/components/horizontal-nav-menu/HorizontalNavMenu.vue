@@ -4,44 +4,7 @@
       <vs-navbar class="vx-navbar navbar-custom navbar-skelton" :color="navbarColor">
 
         <ul class="menu-items flex flex-wrap w-full items-center">
-          <li
-            class  = "menu-item"
-            v-for  = "(item, index) in navMenuItems"
-            :key   = "index"
-            :class = "{'mr-2': !(navMenuItems.length === index+1)}">
 
-            <!-- If header -->
-            <template v-if="item.header">
-              <h-nav-menu-header :header="item" class="menu-header relative" />
-            </template>
-
-            <!-- If it's group -->
-            <template v-else-if="item.submenu">
-              <h-nav-menu-group
-                class="menu-group relative py-4"
-                bottom
-                :key        ="`group-${index}`"
-                :group      ="item"
-                :groupIndex ="index"
-                :open       ="checkGrpChildrenActive(item)" />
-            </template>
-
-            <!-- If it's link -->
-            <div v-else-if="item.url" class="menu-link">
-              <h-nav-menu-item
-                class       = "relative py-4 cursor-pointer"
-                :to         = "item.slug !== 'external' ? item.url : null"
-                :href       = "item.slug === 'external' ? item.url : null"
-                :icon       = "item.icon"
-                :target     = "item.target"
-                :isDisabled = "item.isDisabled"
-                :slug       = "item.slug">
-                  <span class="truncate">{{ item.name }}</span>
-                  <vs-chip :color="item.tagColor" v-if="item.tag">{{ item.tag }}</vs-chip>
-              </h-nav-menu-item>
-            </div>
-
-          </li>
         </ul>
       </vs-navbar>
     </div>

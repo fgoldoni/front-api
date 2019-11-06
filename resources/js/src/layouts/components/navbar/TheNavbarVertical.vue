@@ -57,24 +57,40 @@
 
       <vs-spacer />
 
+      <!-- I18N -->
+      <vs-dropdown vs-custom-content vs-trigger-click class="cursor-pointer">
+        <span class="cursor-pointer flex items-center i18n-locale">
+          <img class="h-4 w-5" :src="i18n_locale_img" :alt="$i18n.locale" />
+          <span class="hidden sm:block ml-2">{{ getCurrentLocaleData.lang }}</span>
+        </span>
+        <vs-dropdown-menu class="w-48 i18n-dropdown vx-navbar-dropdown">
+          <vs-dropdown-item @click="updateLocale('en')"><img class="h-4 w-5 mr-2" src="@assets/images/flags/en.png" alt="en" /> &nbsp;English</vs-dropdown-item>
+          <vs-dropdown-item @click="updateLocale('fr')"><img class="h-4 w-5 mr-2" src="@assets/images/flags/fr.png" alt="fr" /> &nbsp;French</vs-dropdown-item>
+          <vs-dropdown-item @click="updateLocale('de')"><img class="h-4 w-5 mr-2" src="@assets/images/flags/de.png" alt="de" /> &nbsp;German</vs-dropdown-item>
+          <vs-dropdown-item @click="updateLocale('pt')"><img class="h-4 w-5 mr-2" src="@assets/images/flags/pt.png" alt="pt" /> &nbsp;Portuguese</vs-dropdown-item>
+        </vs-dropdown-menu>
+      </vs-dropdown>
+
       <!-- SEARCHBAR -->
       <div class="search-full-container w-full h-full absolute left-0" :class="{'flex': showFullSearch}" v-show="showFullSearch">
-          <vx-auto-suggest
-            class="w-full"
-            inputClassses="w-full vs-input-no-border vs-input-no-shdow-focus"
-            :autoFocus="showFullSearch"
-            :data="navbarSearchAndPinList"
-            icon="SearchIcon"
-            placeholder="Search..."
-            ref="navbarSearch"
-            @closeSearchbar="showFullSearch = false"
-            @selected="selected"
-            background-overlay />
-          <div class="absolute right-0 h-full z-50">
-              <feather-icon icon="XIcon" class="px-4 cursor-pointer h-full close-search-icon" @click="showFullSearch = false"></feather-icon>
-          </div>
+        <vx-auto-suggest
+                class="w-full"
+                inputClassses="w-full vs-input-no-border vs-input-no-shdow-focus"
+                :autoFocus="showFullSearch"
+                :data="navbarSearchAndPinList"
+                icon="SearchIcon"
+                placeholder="Search..."
+                ref="navbarSearch"
+                @closeSearchbar="showFullSearch = false"
+                @selected="selected"
+                background-overlay />
+        <div class="absolute right-0 h-full z-50">
+          <feather-icon icon="XIcon" class="px-4 cursor-pointer h-full close-search-icon" @click="showFullSearch = false"></feather-icon>
+        </div>
       </div>
-      <feather-icon icon="SearchIcon" @click="showFullSearch = true" class="cursor-pointer navbar-fuzzy-search mr-4"></feather-icon>
+      <feather-icon icon="SearchIcon" @click="showFullSearch = true" class="cursor-pointer navbar-fuzzy-search ml-4"></feather-icon>
+
+      <!-- CART DROPDOWN -->
 
       <!-- NOTIFICATIONS -->
       <vs-dropdown vs-custom-content vs-trigger-click class="cursor-pointer">
@@ -87,20 +103,20 @@
           </div>
 
           <VuePerfectScrollbar ref="mainSidebarPs" class="scroll-area--nofications-dropdown p-0 mb-10" :settings="settings">
-          <ul class="bordered-items">
-            <li v-for="ntf in unreadNotifications" :key="ntf.index" class="flex justify-between px-4 py-4 notification cursor-pointer">
-              <div class="flex items-start">
-                <feather-icon :icon="ntf.icon" :svgClasses="[`text-${ntf.category}`, 'stroke-current mr-1 h-6 w-6']"></feather-icon>
-                <div class="mx-2">
-                  <span class="font-medium block notification-title" :class="[`text-${ntf.category}`]">{{ ntf.title }}</span>
-                  <small>{{ ntf.msg }}</small>
+            <ul class="bordered-items">
+              <li v-for="ntf in unreadNotifications" :key="ntf.index" class="flex justify-between px-4 py-4 notification cursor-pointer">
+                <div class="flex items-start">
+                  <feather-icon :icon="ntf.icon" :svgClasses="[`text-${ntf.category}`, 'stroke-current mr-1 h-6 w-6']"></feather-icon>
+                  <div class="mx-2">
+                    <span class="font-medium block notification-title" :class="[`text-${ntf.category}`]">{{ ntf.title }}</span>
+                    <small>{{ ntf.msg }}</small>
+                  </div>
                 </div>
-              </div>
-              <small class="mt-1 whitespace-no-wrap">{{ elapsedTime(ntf.time) }}</small>
-            </li>
-          </ul>
+                <small class="mt-1 whitespace-no-wrap">{{ elapsedTime(ntf.time) }}</small>
+              </li>
+            </ul>
           </VuePerfectScrollbar>
-                    <div class="
+          <div class="
                         checkout-footer
                         fixed
                         bottom-0
@@ -117,8 +133,8 @@
                         border-solid
                         d-theme-border-grey-light
                         cursor-pointer">
-                        <span>View All Notifications</span>
-                    </div>
+            <span>View All Notifications</span>
+          </div>
         </vs-dropdown-menu>
       </vs-dropdown>
 
@@ -131,47 +147,47 @@
         <vs-dropdown vs-custom-content vs-trigger-click class="cursor-pointer">
           <div class="con-img ml-3">
             <img
-              v-if="activeUserImg"
-              key="onlineImg"
-              :src="activeUserImg"
-              alt="user-img"
-              width="40"
-              height="40"
-              class="rounded-full shadow-md cursor-pointer block" />
+                    v-if="activeUserImg"
+                    key="onlineImg"
+                    :src="activeUserImg"
+                    alt="user-img"
+                    width="40"
+                    height="40"
+                    class="rounded-full shadow-md cursor-pointer block" />
           </div>
           <vs-dropdown-menu class="vx-navbar-dropdown">
             <ul style="min-width: 9rem">
               <li
-                class="flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white"
-                @click="$router.push('/pages/profile').catch(() => {})">
+                      class="flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white"
+                      @click="$router.push('/pages/profile').catch(() => {})">
 
                 <feather-icon icon="UserIcon" svgClasses="w-4 h-4" />
                 <span class="ml-2">Profile</span>
               </li>
               <li
-                class="flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white"
-                @click="$router.push('/apps/email').catch(() => {})">
+                      class="flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white"
+                      @click="$router.push('/apps/email').catch(() => {})">
 
                 <feather-icon icon="MailIcon" svgClasses="w-4 h-4" />
                 <span class="ml-2">Inbox</span>
               </li>
               <li
-                class="flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white"
-                @click="$router.push('/apps/todo').catch(() => {})">
+                      class="flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white"
+                      @click="$router.push('/apps/todo').catch(() => {})">
 
                 <feather-icon icon="CheckSquareIcon" svgClasses="w-4 h-4" />
                 <span class="ml-2">Tasks</span>
               </li>
               <li
-                class="flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white"
-                @click="$router.push('/apps/chat').catch(() => {})">
+                      class="flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white"
+                      @click="$router.push('/apps/chat').catch(() => {})">
 
                 <feather-icon icon="MessageSquareIcon" svgClasses="w-4 h-4" />
                 <span class="ml-2">Chat</span>
               </li>
               <li
-                class="flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white"
-                @click="$router.push('/apps/eCommerce/wish-list').catch(() => {})">
+                      class="flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white"
+                      @click="$router.push('/apps/eCommerce/wish-list').catch(() => {})">
 
                 <feather-icon icon="HeartIcon" svgClasses="w-4 h-4" />
                 <span class="ml-2">Wish List</span>
@@ -180,8 +196,8 @@
               <vs-divider class="m-1"></vs-divider>
 
               <li
-                class="flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white"
-                @click="logout">
+                      class="flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white"
+                      @click="logout">
                 <feather-icon icon="LogOutIcon" svgClasses="w-4 h-4"/>
                 <span class="ml-2">Logout</span>
               </li>
@@ -252,6 +268,27 @@ export default {
             else if (this.verticalNavMenuWidth) return "navbar-full"
         },
 
+      // I18N
+      getCurrentLocaleData() {
+        const locale = this.$i18n.locale;
+        if (locale == "en") return { flag: "us", lang: 'English' }
+        else if (locale == "pt") return { flag: "br", lang: 'Portuguese' }
+        else if (locale == "fr") return { flag: "fr", lang: 'French' }
+        else if (locale == "de") return { flag: "de", lang: 'German' }
+      },
+      i18n_locale_img() {
+        const locale = this.$i18n.locale
+
+        if(locale === "en") return require("@assets/images/flags/en.png")
+        else if(locale === "de") return require("@assets/images/flags/de.png")
+        else if(locale === "fr") return require("@assets/images/flags/fr.png")
+        else if(locale === "pt") return require("@assets/images/flags/pt.png")
+        else return null
+        // return ""
+        // return require("@assets/images/flags/"  + x + ".png")
+        // return require(`@assets/images/flags/${this.$i18n.locale}.png`)
+      },
+
         // BOOKMARK & SEARCH
         data() {
             return this.$store.state.navbarSearchAndPinList;
@@ -288,6 +325,9 @@ export default {
         }
     },
     methods: {
+        updateLocale(locale) {
+          this.$i18n.locale = locale;
+        },
         showSidebar() {
             this.$store.commit('TOGGLE_IS_VERTICAL_NAV_MENU_ACTIVE', true);
         },

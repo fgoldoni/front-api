@@ -671,43 +671,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -1893,6 +1856,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -1984,6 +1963,29 @@ __webpack_require__.r(__webpack_exports__);
     classObj: function classObj() {
       if (this.verticalNavMenuWidth == "default") return "navbar-default";else if (this.verticalNavMenuWidth == "reduced") return "navbar-reduced";else if (this.verticalNavMenuWidth) return "navbar-full";
     },
+    // I18N
+    getCurrentLocaleData: function getCurrentLocaleData() {
+      var locale = this.$i18n.locale;
+      if (locale == "en") return {
+        flag: "us",
+        lang: 'English'
+      };else if (locale == "pt") return {
+        flag: "br",
+        lang: 'Portuguese'
+      };else if (locale == "fr") return {
+        flag: "fr",
+        lang: 'French'
+      };else if (locale == "de") return {
+        flag: "de",
+        lang: 'German'
+      };
+    },
+    i18n_locale_img: function i18n_locale_img() {
+      var locale = this.$i18n.locale;
+      if (locale === "en") return __webpack_require__(/*! @assets/images/flags/en.png */ "./resources/assets/images/flags/en.png");else if (locale === "de") return __webpack_require__(/*! @assets/images/flags/de.png */ "./resources/assets/images/flags/de.png");else if (locale === "fr") return __webpack_require__(/*! @assets/images/flags/fr.png */ "./resources/assets/images/flags/fr.png");else if (locale === "pt") return __webpack_require__(/*! @assets/images/flags/pt.png */ "./resources/assets/images/flags/pt.png");else return null; // return ""
+      // return require("@assets/images/flags/"  + x + ".png")
+      // return require(`@assets/images/flags/${this.$i18n.locale}.png`)
+    },
     // BOOKMARK & SEARCH
     data: function data() {
       return this.$store.state.navbarSearchAndPinList;
@@ -2019,6 +2021,9 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    updateLocale: function updateLocale(locale) {
+      this.$i18n.locale = locale;
+    },
     showSidebar: function showSidebar() {
       this.$store.commit('TOGGLE_IS_VERTICAL_NAV_MENU_ACTIVE', true);
     },
@@ -4504,83 +4509,9 @@ var render = function() {
             attrs: { color: _vm.navbarColor }
           },
           [
-            _c(
-              "ul",
-              { staticClass: "menu-items flex flex-wrap w-full items-center" },
-              _vm._l(_vm.navMenuItems, function(item, index) {
-                return _c(
-                  "li",
-                  {
-                    key: index,
-                    staticClass: "menu-item",
-                    class: { "mr-2": !(_vm.navMenuItems.length === index + 1) }
-                  },
-                  [
-                    item.header
-                      ? [
-                          _c("h-nav-menu-header", {
-                            staticClass: "menu-header relative",
-                            attrs: { header: item }
-                          })
-                        ]
-                      : item.submenu
-                      ? [
-                          _c("h-nav-menu-group", {
-                            key: "group-" + index,
-                            staticClass: "menu-group relative py-4",
-                            attrs: {
-                              bottom: "",
-                              group: item,
-                              groupIndex: index,
-                              open: _vm.checkGrpChildrenActive(item)
-                            }
-                          })
-                        ]
-                      : item.url
-                      ? _c(
-                          "div",
-                          { staticClass: "menu-link" },
-                          [
-                            _c(
-                              "h-nav-menu-item",
-                              {
-                                staticClass: "relative py-4 cursor-pointer",
-                                attrs: {
-                                  to:
-                                    item.slug !== "external" ? item.url : null,
-                                  href:
-                                    item.slug === "external" ? item.url : null,
-                                  icon: item.icon,
-                                  target: item.target,
-                                  isDisabled: item.isDisabled,
-                                  slug: item.slug
-                                }
-                              },
-                              [
-                                _c("span", { staticClass: "truncate" }, [
-                                  _vm._v(_vm._s(item.name))
-                                ]),
-                                _vm._v(" "),
-                                item.tag
-                                  ? _c(
-                                      "vs-chip",
-                                      { attrs: { color: item.tagColor } },
-                                      [_vm._v(_vm._s(item.tag))]
-                                    )
-                                  : _vm._e()
-                              ],
-                              1
-                            )
-                          ],
-                          1
-                        )
-                      : _vm._e()
-                  ],
-                  2
-                )
-              }),
-              0
-            )
+            _c("ul", {
+              staticClass: "menu-items flex flex-wrap w-full items-center"
+            })
           ]
         )
       ],
@@ -5912,6 +5843,124 @@ var render = function() {
             _c("vs-spacer"),
             _vm._v(" "),
             _c(
+              "vs-dropdown",
+              {
+                staticClass: "cursor-pointer",
+                attrs: { "vs-custom-content": "", "vs-trigger-click": "" }
+              },
+              [
+                _c(
+                  "span",
+                  {
+                    staticClass: "cursor-pointer flex items-center i18n-locale"
+                  },
+                  [
+                    _c("img", {
+                      staticClass: "h-4 w-5",
+                      attrs: { src: _vm.i18n_locale_img, alt: _vm.$i18n.locale }
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "hidden sm:block ml-2" }, [
+                      _vm._v(_vm._s(_vm.getCurrentLocaleData.lang))
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "vs-dropdown-menu",
+                  { staticClass: "w-48 i18n-dropdown vx-navbar-dropdown" },
+                  [
+                    _c(
+                      "vs-dropdown-item",
+                      {
+                        on: {
+                          click: function($event) {
+                            return _vm.updateLocale("en")
+                          }
+                        }
+                      },
+                      [
+                        _c("img", {
+                          staticClass: "h-4 w-5 mr-2",
+                          attrs: {
+                            src: __webpack_require__(/*! @assets/images/flags/en.png */ "./resources/assets/images/flags/en.png"),
+                            alt: "en"
+                          }
+                        }),
+                        _vm._v("  English")
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "vs-dropdown-item",
+                      {
+                        on: {
+                          click: function($event) {
+                            return _vm.updateLocale("fr")
+                          }
+                        }
+                      },
+                      [
+                        _c("img", {
+                          staticClass: "h-4 w-5 mr-2",
+                          attrs: {
+                            src: __webpack_require__(/*! @assets/images/flags/fr.png */ "./resources/assets/images/flags/fr.png"),
+                            alt: "fr"
+                          }
+                        }),
+                        _vm._v("  French")
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "vs-dropdown-item",
+                      {
+                        on: {
+                          click: function($event) {
+                            return _vm.updateLocale("de")
+                          }
+                        }
+                      },
+                      [
+                        _c("img", {
+                          staticClass: "h-4 w-5 mr-2",
+                          attrs: {
+                            src: __webpack_require__(/*! @assets/images/flags/de.png */ "./resources/assets/images/flags/de.png"),
+                            alt: "de"
+                          }
+                        }),
+                        _vm._v("  German")
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "vs-dropdown-item",
+                      {
+                        on: {
+                          click: function($event) {
+                            return _vm.updateLocale("pt")
+                          }
+                        }
+                      },
+                      [
+                        _c("img", {
+                          staticClass: "h-4 w-5 mr-2",
+                          attrs: {
+                            src: __webpack_require__(/*! @assets/images/flags/pt.png */ "./resources/assets/images/flags/pt.png"),
+                            alt: "pt"
+                          }
+                        }),
+                        _vm._v("  Portuguese")
+                      ]
+                    )
+                  ],
+                  1
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
               "div",
               {
                 directives: [
@@ -5969,7 +6018,7 @@ var render = function() {
             ),
             _vm._v(" "),
             _c("feather-icon", {
-              staticClass: "cursor-pointer navbar-fuzzy-search mr-4",
+              staticClass: "cursor-pointer navbar-fuzzy-search ml-4",
               attrs: { icon: "SearchIcon" },
               on: {
                 click: function($event) {
@@ -7165,6 +7214,50 @@ var staticRenderFns = []
 render._withStripped = true
 
 
+
+/***/ }),
+
+/***/ "./resources/assets/images/flags/de.png":
+/*!**********************************************!*\
+  !*** ./resources/assets/images/flags/de.png ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/de.png?5d9561246523cf6183928756fd605e25";
+
+/***/ }),
+
+/***/ "./resources/assets/images/flags/en.png":
+/*!**********************************************!*\
+  !*** ./resources/assets/images/flags/en.png ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/en.png?83b065848d14d33c0d10a13e01862f34";
+
+/***/ }),
+
+/***/ "./resources/assets/images/flags/fr.png":
+/*!**********************************************!*\
+  !*** ./resources/assets/images/flags/fr.png ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/fr.png?134bee9f9d794dc5c0922d1b9bdbb710";
+
+/***/ }),
+
+/***/ "./resources/assets/images/flags/pt.png":
+/*!**********************************************!*\
+  !*** ./resources/assets/images/flags/pt.png ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/pt.png?eba93d33545c78cc67915d9be8323661";
 
 /***/ }),
 
