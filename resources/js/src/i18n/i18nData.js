@@ -12,6 +12,7 @@ export default {
     SimpleCalendar: 'Simple Calendar',
 		Shop: 'Shop',
 		Cart: 'Cart',
+		UsersManagement: 'Users Management',
     WishList: 'Wish List',
 		Checkout: 'Checkout',
 		UI: 'UI',

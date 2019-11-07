@@ -32,4 +32,11 @@ export default [
     slug: "page2",
     icon: "FileIcon",
   },
+  {
+    url: "/admin/users",
+    name: "Users Management",
+    slug: "users-management",
+    icon: "UsersIcon",
+    i18n: "menu.users_management",
+  },
 ]

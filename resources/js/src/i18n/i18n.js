@@ -10,7 +10,7 @@
 
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
-import i18nData from './i18nData'
+import i18nData from './lang'
 
 Vue.use(VueI18n)
 
