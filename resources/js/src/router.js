@@ -43,15 +43,7 @@ const router = new Router({
               {
                 path: '/',
                 name: 'home',
-                component: () => import('./views/Home.vue'),
-                meta: {
-                  breadcrumb: [
-                    { title: 'Home', url: '/' },
-                    { title: 'agGrid Table', active: true },
-                  ],
-                  pageTitle: 'agGrid Table',
-                  rule: 'editor'
-                }
+                component: () => import('./views/Home.vue')
               },
               {
                 path: '/page2',
@@ -61,7 +53,14 @@ const router = new Router({
               {
                 path: '/admin/users',
                 name: 'admin.users',
-                component: () => import('./views/admin/UsersComponent.vue')
+                component: () => import('./views/admin/UsersComponent.vue'),
+                meta: {
+                  breadcrumb: [
+                    { title: 'Home', url: '/' },
+                    { title: 'Users Management', active : true }
+                  ],
+                  pageTitle: 'Admin'
+                }
               },
             ],
         },

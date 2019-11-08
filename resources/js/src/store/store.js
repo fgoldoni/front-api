@@ -18,11 +18,21 @@ import actions from "./actions"
 
 Vue.use(Vuex)
 
+import moduleECommerce from './eCommerce/moduleECommerce.js'
+
 
 export default new Vuex.Store({
     getters,
     mutations,
     state,
     actions,
+    modules: {
+        // todo: moduleTodo,
+        // calendar: moduleCalendar,
+        // chat: moduleChat,
+        // email: moduleEmail,
+        // auth: moduleAuth,
+        eCommerce: moduleECommerce,
+    },
     strict: process.env.NODE_ENV !== 'production'
 })

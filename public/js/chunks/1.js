@@ -1872,6 +1872,56 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2008,6 +2058,10 @@ __webpack_require__.r(__webpack_exports__);
       set: function set(list) {
         this.$store.dispatch('arrangeStarredPagesMore', list);
       }
+    },
+    // CART DROPDOWN
+    cartItems: function cartItems() {
+      return this.$store.state.eCommerce.cartItems.slice().reverse();
     },
     // PROFILE
     activeUserInfo: function activeUserInfo() {
@@ -5931,27 +5985,6 @@ var render = function() {
                         }),
                         _vm._v("  German")
                       ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "vs-dropdown-item",
-                      {
-                        on: {
-                          click: function($event) {
-                            return _vm.updateLocale("pt")
-                          }
-                        }
-                      },
-                      [
-                        _c("img", {
-                          staticClass: "h-4 w-5 mr-2",
-                          attrs: {
-                            src: __webpack_require__(/*! @assets/images/flags/pt.png */ "./resources/assets/images/flags/pt.png"),
-                            alt: "pt"
-                          }
-                        }),
-                        _vm._v("  Portuguese")
-                      ]
                     )
                   ],
                   1
@@ -6026,6 +6059,225 @@ var render = function() {
                 }
               }
             }),
+            _vm._v(" "),
+            _c(
+              "vs-dropdown",
+              {
+                staticClass: "cursor-pointer",
+                attrs: { "vs-custom-content": "", "vs-trigger-click": "" }
+              },
+              [
+                _c("feather-icon", {
+                  staticClass: "cursor-pointer ml-4 mr-6 mt-1",
+                  attrs: {
+                    icon: "ShoppingCartIcon",
+                    badge: _vm.cartItems.length
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "vs-dropdown-menu",
+                  {
+                    staticClass: "cart-dropdown vx-navbar-dropdown",
+                    class: { "dropdown-custom": _vm.cartItems.length }
+                  },
+                  [
+                    _vm.cartItems.length
+                      ? [
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "notification-header text-center p-5 bg-primary text-white"
+                            },
+                            [
+                              _c("h3", { staticClass: "text-white" }, [
+                                _vm._v(_vm._s(_vm.cartItems.length) + " Item"),
+                                _c(
+                                  "span",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "show",
+                                        rawName: "v-show",
+                                        value: _vm.cartItems.length > 1,
+                                        expression: "cartItems.length > 1"
+                                      }
+                                    ]
+                                  },
+                                  [_vm._v("s")]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("p", { staticClass: "opacity-75" }, [
+                                _vm._v("In Your Cart")
+                              ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "VuePerfectScrollbar",
+                            {
+                              ref: "mainSidebarPs",
+                              staticClass:
+                                "scroll-area--cart-items-dropdowm p-0 mb-10",
+                              attrs: { settings: _vm.settings }
+                            },
+                            [
+                              _c(
+                                "ul",
+                                { staticClass: "bordered-items" },
+                                _vm._l(_vm.cartItems, function(item) {
+                                  return _c(
+                                    "li",
+                                    {
+                                      key: item.objectID,
+                                      staticClass:
+                                        "vx-row no-gutter cart-item cursor-pointer"
+                                    },
+                                    [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "vx-col w-1/5 item-img-container bg-white flex items-center justify-center"
+                                        },
+                                        [
+                                          _c("img", {
+                                            staticClass:
+                                              "cart-dropdown-item-img p-4",
+                                            attrs: {
+                                              src: item.image,
+                                              alt: "item"
+                                            }
+                                          })
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "vx-col w-4/5 pr-4 pl-2 py-4 flex flex-col justify-center"
+                                        },
+                                        [
+                                          _c(
+                                            "span",
+                                            {
+                                              staticClass:
+                                                "font-medium block cart-item-title truncate"
+                                            },
+                                            [_vm._v(_vm._s(item.name))]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "small",
+                                            { staticClass: "truncate mb-2" },
+                                            [_vm._v(_vm._s(item.description))]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass:
+                                                "flex items-center justify-between"
+                                            },
+                                            [
+                                              _c(
+                                                "span",
+                                                {
+                                                  staticClass:
+                                                    "text-sm font-medium"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(item.quantity) + " "
+                                                  ),
+                                                  _c("small", [_vm._v("x")]),
+                                                  _vm._v(
+                                                    " $" + _vm._s(item.price)
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c("feather-icon", {
+                                                staticClass:
+                                                  "hover:text-danger",
+                                                attrs: {
+                                                  icon: "XIcon",
+                                                  svgClasses:
+                                                    "h-4 w-4 cursor-pointer text-danger"
+                                                },
+                                                on: {
+                                                  click: function($event) {
+                                                    $event.stopPropagation()
+                                                    return _vm.removeItemFromCart(
+                                                      item
+                                                    )
+                                                  }
+                                                }
+                                              })
+                                            ],
+                                            1
+                                          )
+                                        ]
+                                      )
+                                    ]
+                                  )
+                                }),
+                                0
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                " checkout-footer fixed bottom-0 rounded-b-lg text-primary font-semibold w-full p-2 text-center border border-b-0 border-l-0 border-r-0 border-solid d-theme-border-grey-light cursor-pointer",
+                              on: {
+                                click: function($event) {
+                                  _vm.$router
+                                    .push("/apps/eCommerce/checkout")
+                                    .catch(function() {})
+                                }
+                              }
+                            },
+                            [
+                              _c(
+                                "span",
+                                {
+                                  staticClass:
+                                    "flex items-center justify-center"
+                                },
+                                [
+                                  _c("feather-icon", {
+                                    attrs: {
+                                      icon: "ShoppingCartIcon",
+                                      svgClasses: "h-4 w-4"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("span", { staticClass: "ml-2" }, [
+                                    _vm._v("Checkout")
+                                  ])
+                                ],
+                                1
+                              )
+                            ]
+                          )
+                        ]
+                      : [
+                          _c("p", { staticClass: "p-4" }, [
+                            _vm._v("Your Cart Is Empty.")
+                          ])
+                        ]
+                  ],
+                  2
+                )
+              ],
+              1
+            ),
             _vm._v(" "),
             _c(
               "vs-dropdown",

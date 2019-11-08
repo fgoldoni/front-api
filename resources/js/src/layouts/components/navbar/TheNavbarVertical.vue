@@ -67,7 +67,6 @@
           <vs-dropdown-item @click="updateLocale('en')"><img class="h-4 w-5 mr-2" src="@assets/images/flags/en.png" alt="en" /> &nbsp;English</vs-dropdown-item>
           <vs-dropdown-item @click="updateLocale('fr')"><img class="h-4 w-5 mr-2" src="@assets/images/flags/fr.png" alt="fr" /> &nbsp;French</vs-dropdown-item>
           <vs-dropdown-item @click="updateLocale('de')"><img class="h-4 w-5 mr-2" src="@assets/images/flags/de.png" alt="de" /> &nbsp;German</vs-dropdown-item>
-          <vs-dropdown-item @click="updateLocale('pt')"><img class="h-4 w-5 mr-2" src="@assets/images/flags/pt.png" alt="pt" /> &nbsp;Portuguese</vs-dropdown-item>
         </vs-dropdown-menu>
       </vs-dropdown>
 
@@ -91,6 +90,57 @@
       <feather-icon icon="SearchIcon" @click="showFullSearch = true" class="cursor-pointer navbar-fuzzy-search ml-4"></feather-icon>
 
       <!-- CART DROPDOWN -->
+      <vs-dropdown vs-custom-content vs-trigger-click class="cursor-pointer">
+        <feather-icon icon="ShoppingCartIcon" class="cursor-pointer ml-4 mr-6 mt-1" :badge="cartItems.length"></feather-icon>
+        <vs-dropdown-menu class="cart-dropdown vx-navbar-dropdown" :class="{'dropdown-custom': cartItems.length}">
+
+          <!-- IF CART HAVE ITEMS: HEADER -->
+          <template v-if="cartItems.length">
+            <div class="notification-header text-center p-5 bg-primary text-white">
+              <h3 class="text-white">{{ cartItems.length }} Item<span v-show="cartItems.length > 1">s</span></h3>
+              <p class="opacity-75">In Your Cart</p>
+            </div>
+
+            <!-- CART ITEMS -->
+            <VuePerfectScrollbar ref="mainSidebarPs" class="scroll-area--cart-items-dropdowm p-0 mb-10" :settings="settings">
+              <ul class="bordered-items">
+                <li v-for="item in cartItems" :key="item.objectID" class="vx-row no-gutter cart-item cursor-pointer">
+
+                  <!-- IMG COL -->
+                  <div class="vx-col w-1/5 item-img-container bg-white flex items-center justify-center">
+                    <img :src="item.image" alt="item" class="cart-dropdown-item-img p-4">
+                  </div>
+
+                  <!-- INFO COL -->
+                  <div class="vx-col w-4/5 pr-4 pl-2 py-4 flex flex-col justify-center">
+                    <span class="font-medium block cart-item-title truncate">{{ item.name }}</span>
+                    <small class="truncate mb-2">{{ item.description }}</small>
+                    <div class="flex items-center justify-between">
+                      <span class="text-sm font-medium">{{ item.quantity }} <small>x</small> ${{ item.price }}</span>
+                      <feather-icon icon="XIcon" svgClasses="h-4 w-4 cursor-pointer text-danger" class="hover:text-danger" @click.stop="removeItemFromCart(item)" />
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </VuePerfectScrollbar>
+            <div
+                    class=" checkout-footer fixed bottom-0 rounded-b-lg text-primary font-semibold w-full p-2 text-center border border-b-0 border-l-0 border-r-0 border-solid d-theme-border-grey-light cursor-pointer"
+                    @click="$router.push('/apps/eCommerce/checkout').catch(() => {})">
+
+                            <span class="flex items-center justify-center">
+                              <feather-icon icon="ShoppingCartIcon" svgClasses="h-4 w-4"></feather-icon>
+                              <span class="ml-2">Checkout</span>
+                            </span>
+
+            </div>
+          </template>
+
+          <!-- IF CART IS EMPTY -->
+          <template v-else>
+            <p class="p-4">Your Cart Is Empty.</p>
+          </template>
+        </vs-dropdown-menu>
+      </vs-dropdown>
 
       <!-- NOTIFICATIONS -->
       <vs-dropdown vs-custom-content vs-trigger-click class="cursor-pointer">
@@ -311,6 +361,11 @@ export default {
             set(list) {
                 this.$store.dispatch('arrangeStarredPagesMore', list);
             }
+        },
+
+        // CART DROPDOWN
+        cartItems() {
+          return this.$store.state.eCommerce.cartItems.slice().reverse();
         },
 
         // PROFILE
