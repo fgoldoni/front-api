@@ -57416,7 +57416,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     // =============================================================================
     path: '',
     component: function component() {
-      return Promise.all(/*! import() */[__webpack_require__.e(4), __webpack_require__.e(2)]).then(__webpack_require__.bind(null, /*! ./layouts/main/Main.vue */ "./resources/js/src/layouts/main/Main.vue"));
+      return Promise.all(/*! import() */[__webpack_require__.e(4), __webpack_require__.e(2), __webpack_require__.e(3)]).then(__webpack_require__.bind(null, /*! ./layouts/main/Main.vue */ "./resources/js/src/layouts/main/Main.vue"));
     },
     children: [// =============================================================================
     // Theme Routes
@@ -57437,7 +57437,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/users',
       name: 'admin.users',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(5)]).then(__webpack_require__.bind(null, /*! ./views/admin/UsersComponent.vue */ "./resources/js/src/views/admin/UsersComponent.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(4), __webpack_require__.e(11)]).then(__webpack_require__.bind(null, /*! ./views/admin/users/UsersComponent.vue */ "./resources/js/src/views/admin/users/UsersComponent.vue"));
       },
       meta: {
         breadcrumb: [{
@@ -57453,7 +57453,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       path: '/admin/roles',
       name: 'admin.roles',
       component: function component() {
-        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1), __webpack_require__.e(3)]).then(__webpack_require__.bind(null, /*! ./views/admin/roles/RolesComponent.vue */ "./resources/js/src/views/admin/roles/RolesComponent.vue"));
+        return Promise.all(/*! import() */[__webpack_require__.e(0), __webpack_require__.e(1)]).then(__webpack_require__.bind(null, /*! ./views/admin/roles/RolesComponent.vue */ "./resources/js/src/views/admin/roles/RolesComponent.vue"));
       },
       meta: {
         breadcrumb: [{

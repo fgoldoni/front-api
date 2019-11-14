@@ -53,7 +53,7 @@ const router = new Router({
               {
                 path: '/admin/users',
                 name: 'admin.users',
-                component: () => import('./views/admin/UsersComponent.vue'),
+                component: () => import('./views/admin/users/UsersComponent.vue'),
                 meta: {
                   breadcrumb: [
                     { title: 'Home', url: '/' },
