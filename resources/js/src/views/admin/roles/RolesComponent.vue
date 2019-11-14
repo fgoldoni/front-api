@@ -71,8 +71,11 @@
 </template>
 
 <script>
+  import Vue from 'vue'
   import { AgGridVue } from "ag-grid-vue"
-  import contacts from "@/views/ui-elements/ag-grid-table/data.json"
+  import config from './config'
+  Vue.component('actions', config.actions)
+  Vue.component('roles', config.roles)
 
   export default {
     name: "UsersComponent",
@@ -84,75 +87,27 @@
         searchQuery: '',
         gridOptions: {},
         maxPageNumbers: 7,
+        paginationSize: 5,
         gridApi: null,
         defaultColDef: {
           sortable: true,
-          editable: true,
           resizable: true,
           suppressMenu: true
         },
-        columnDefs: [
-          {
-            headerName: 'First Name',
-            field: 'firstname',
-            width: 175,
-            filter: true,
-            checkboxSelection: true,
-            headerCheckboxSelectionFilteredOnly: true,
-            headerCheckboxSelection: true,
-          },
-          {
-            headerName: 'Last Name',
-            field: 'lastname',
-            filter: true,
-            width: 175,
-          },
-          {
-            headerName: 'Email',
-            field: 'email',
-            filter: true,
-            width: 250,
-            pinned: 'left'
-          },
-          {
-            headerName: 'Company',
-            field: 'company',
-            filter: true,
-            width: 250,
-          },
-          {
-            headerName: 'City',
-            field: 'city',
-            filter: true,
-            width: 150,
-          },
-          {
-            headerName: 'Country',
-            field: 'country',
-            filter: true,
-            width: 150,
-          },
-          {
-            headerName: 'State',
-            field: 'state',
-            filter: true,
-            width: 100,
-          },
-          {
-            headerName: 'Zip',
-            field: 'zip',
-            filter: 'agNumberColumnFilter',
-            width: 100,
-          },
-          {
-            headerName: 'Followers',
-            field: 'followers',
-            filter: "agNumberColumnFilter",
-            width: 125,
-          },
-        ],
-        contacts: contacts,
+        columnDefs: [{}],
+        contacts: [{}],
       }
+    },
+    beforeMount() {
+      this.context = {
+        componentParent: this
+      }
+      this.columnDefs = config.fields
+      this.$http.get('api/users')
+          .then(this.onSuccess)
+          .catch(this.onFailed)
+          .then(() => {
+          })
     },
     watch: {
       '$store.state.windowWidth'(val) {
@@ -166,7 +121,7 @@
     computed: {
       paginationPageSize() {
         if(this.gridApi) return this.gridApi.paginationGetPageSize()
-        else return 50
+        else return this.paginationSize
       },
       totalPages() {
         if(this.gridApi) return this.gridApi.paginationGetTotalPages()
@@ -185,7 +140,13 @@
     methods: {
       updateSearchQuery(val) {
         this.gridApi.setQuickFilter(val);
-      }
+      },
+      onSuccess (response) {
+        this.contacts = response.data.data
+      },
+      onFailed (response) {
+        debugger
+      },
     },
     mounted() {
       this.gridApi = this.gridOptions.api;

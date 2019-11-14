@@ -58,6 +58,18 @@ export default {
             "previous": "&laquo; Zurück",
             "next": "Weiter &raquo;"
         },
+        "table": {
+            "id": "Id",
+            "first_name": "Vorname",
+            "last_name": "Nachname",
+            "full_name": "Namen",
+            "email": "Email",
+            "updated_at": "Aktualisiert am",
+            "created_at": "Erstellt am",
+            "deleted_at": "Gelöscht am",
+            "roles": "Rechte",
+            "actions": "Actions"
+        },
         "menu": {
             "users_management": "Benutzerverwaltung",
             "roles_management": "Rollenverwaltung"
@@ -221,6 +233,18 @@ export default {
         "pagination": {
             "previous": "&laquo; Previous",
             "next": "Next &raquo;"
+        },
+        "table": {
+            "id": "Id",
+            "first_name": "First Name",
+            "last_name": "Last name",
+            "full_name": "Full name",
+            "email": "Email",
+            "updated_at": "Updated At",
+            "created_at": "Created At",
+            "deleted_at": "Deleted At",
+            "roles": "Roles",
+            "actions": "Actions"
         },
         "menu": {
             "users_management": "Users Management",
@@ -404,6 +428,18 @@ export default {
         "pagination": {
             "previous": "&laquo; Précédent",
             "next": "Suivant &raquo;"
+        },
+        "table": {
+            "id": "Id",
+            "first_name": "Prenom",
+            "last_name": "Nom",
+            "full_name": "Nom complet",
+            "email": "Email",
+            "updated_at": "Updated At",
+            "created_at": "Created At",
+            "deleted_at": "Deleted At",
+            "roles": "Roles",
+            "actions": "Actions"
         },
         "menu": {
             "users_management": "Gestion des utilisateurs",

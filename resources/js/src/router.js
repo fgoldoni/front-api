@@ -62,6 +62,18 @@ const router = new Router({
                   pageTitle: 'Admin'
                 }
               },
+              {
+                path: '/admin/roles',
+                name: 'admin.roles',
+                component: () => import('./views/admin/roles/RolesComponent.vue'),
+                meta: {
+                  breadcrumb: [
+                    { title: 'Home', url: '/' },
+                    { title: 'Roles Management', active : true }
+                  ],
+                  pageTitle: 'Admin'
+                }
+              },
             ],
         },
     // =============================================================================

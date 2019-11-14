@@ -39,4 +39,11 @@ export default [
     icon: "UsersIcon",
     i18n: "menu.users_management",
   },
+  {
+    url: "/admin/roles",
+    name: "Roles Management",
+    slug: "roles-management",
+    icon: "UsersIcon",
+    i18n: "menu.roles_management",
+  },
 ]
